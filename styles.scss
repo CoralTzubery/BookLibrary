@@ -1,3 +1,21 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+html {
+    font-size: calc(1rem + 0.5vw);
+    line-height: 1.5;
+}
+
 body {
-    background-color: red;
+    font-family: system-ui;
+}
+
+main {
+    width: min(70ch, 100% - 2rem);
+    margin-inline: auto;
 }
