@@ -19,3 +19,7 @@ main {
   width: min(70ch, 100% - 2rem);
   margin-inline: auto;
 }
+
+body {
+  background-color: red;
+}
