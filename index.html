@@ -7,14 +7,91 @@
     <link rel="stylesheet" href="dist/styles.css" />
 </head>
 <body>
+    <header>
+        <nav class="site-nav">
+            <p class="brand">Libi</p>
+            <menu>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="library.html">Library</a></li>
+                <li><a href="order-form.html">Order a New Book</a></li>
+                <li><a href="report-form.html">Lost a Book?</a></li>
+                <li><a href="my-books.html">My Books</a></li>
+                <li><a href="#">log-in</a></li>
+            </menu>
+        </nav>
+    </header>
+
+    <main class="stack">
+        <h1>Welcome to Libi!</h1>
+
+        <article class="box">
+            <h2>Looking for a particular book?</h2>
+            <div class="search">
+                <label for="searchBook"></label>
+                <input type="search" id="searchBook" name="search">
+                <button>🔎</button>
+            </div>
+            
+        </article>
+
+        <article class="box">
+            <h2>Recently Added</h2>
+            <ul> 
+                <li>
+                    <a href="#">
+                        <img src="#" alt="book cover">
+                        <p>category</p>
+                        <p>title</p>
+                        <p>author</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="#" alt="book cover">
+                        <p>category</p>
+                        <p>title</p>
+                        <p>author</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="#" alt="book cover">
+                        <p>category</p>
+                        <p>title</p>
+                        <p>author</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="#" alt="book cover">
+                        <p>category</p>
+                        <p>title</p>
+                        <p>author</p>
+                    </a>
+                </li>
+            </ul>
+        </article>
+
+        <article class="box">
+            <h2>Book Status</h2>
+            <ul>
+                <li>
+                    <p>Title</p>
+                    <p>Author</p>
+                    <p>Category</p>
+                    <p>Status</p>
+                    <p>Action</p>
+                </li>
+                <li>
+                    <p>Title</p>
+                    <p>Author</p>
+                    <p>Category</p>
+                    <p>Status</p>
+                    <button>action</button>
+                </li>
+            </ul>
+        </article>
+    </main>
     
 </body>
-
-<script src="dist/model.js"></script>
-<script src="dist/view.js"></script>
-<script src="dist/controller.js"></script>
-
-<script type="module">
-
-</script>
 </html> 
