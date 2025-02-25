@@ -95,14 +95,3 @@ a:hover {
   gap: 1rem;
   margin: auto;
 }
-
-.box {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  margin: 0;
-  width: calc(100vw - 2rem);
-  align-items: center;
-}
