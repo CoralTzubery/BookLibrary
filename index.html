@@ -24,15 +24,16 @@
     <main class="stack">
         <h1>Welcome to Libi!</h1>
 
-        <article>
+        <form class="search" name="search book">
             <label for="searchBook">Looking for a particular book?</label>
             <input type="search" id="searchBook" name="search" placeholder="Search the site…">
-        </article>
+            <button>🔎</button>
+        </from>
 
         <article>
             <h2>Recently Added</h2>
-            <ul > 
-                <li>
+            <ul class="recently-added"> 
+                <li class="book-card">
                     <a href="#">
                         <img src="#" alt="book cover">
                         <p>category</p>
@@ -40,7 +41,7 @@
                         <p>author</p>
                     </a>
                 </li>
-                <li>
+                <li class="book-card">
                     <a href="#">
                         <img src="#" alt="book cover">
                         <p>category</p>
@@ -48,7 +49,7 @@
                         <p>author</p>
                     </a>
                 </li>
-                <li>
+                <li class="book-card">
                     <a href="#">
                         <img src="#" alt="book cover">
                         <p>category</p>
@@ -56,7 +57,7 @@
                         <p>author</p>
                     </a>
                 </li>
-                <li>
+                <li class="book-card">
                     <a href="#">
                         <img src="#" alt="book cover">
                         <p>category</p>
@@ -69,22 +70,30 @@
 
         <article>
             <h2>Book Status</h2>
-            <ul>
-                <li>
-                    <p>Title</p>
-                    <p>Author</p>
-                    <p>Category</p>
-                    <p>Status</p>
-                    <p>Action</p>
-                </li>
-                <li>
-                    <p>Title</p>
-                    <p>Author</p>
-                    <p>Category</p>
-                    <p>Status</p>
-                    <button>action</button>
-                </li>
-            </ul>
+            <table class="book-table">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>some book title</td>
+                    <td>some author</td>
+                    <td>Fantasy</td>
+                    <td>taken by you</td>
+                    <td><button>return</button></td>
+                </tr>
+                <tr>
+                    <td>some book title</td>
+                    <td>some author</td>
+                    <td>Fantasy</td>
+                    <td>free</td>
+                    <td><button>borrow</button></td>
+                </tr>
+
+            </table>
         </article>
     </main>
     
