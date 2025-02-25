@@ -7,6 +7,49 @@
     <link rel="stylesheet" href="dist/styles.css" />
 </head>
 <body>
-    
+    <header>
+        <nav class="site-nav">
+            <p class="brand">Libi</p>
+            <menu>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="library.html">Library</a></li>
+                <li><a href="order-form.html">Order a New Book</a></li>
+                <li><a href="report-form.html">Lost a Book?</a></li>
+                <li><a href="my-books.html">My Books</a></li>
+                <li><a href="#">log-in</a></li>
+            </menu>
+        </nav>
+    </header>
+
+    <main class="stack">
+        <h1>Order a New Book</h1>
+        <p>If you didn't find a book you like we are open for suggestion.</p>
+        <form class="stack" name="order new">
+            <div class="form-input">
+                <label for="titleInput">Title:</label>
+                <input type="text" id="titleInput" name="title" required>
+            </div>
+            <div class="form-input">
+                <label for="authorInput">Author:</label>
+                <input type="text" id="authorInput" name="author" required>
+            </div>
+            <div class="form-input">
+                <label for="categoryDropdown">Category</label>
+                <select name="category" id="categoryDropdown">
+                    <option value="ficiton">Fiction</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="science">Science</option>
+                    <option value="horror">Horror</option>
+                    <option value="romance">Romance</option>
+                    <option value="psychology">Psychology</option>
+                </select>
+            </div>
+            <div class="cluster">
+                <button>ORDER</button>
+                <button type="reset">RESET</button>
+            </div>
+        </form>
+
+    </main>
 </body>
 </html>

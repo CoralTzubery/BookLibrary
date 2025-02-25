@@ -167,3 +167,41 @@ th, td {
 .card a {
   text-decoration: none;
 }
+
+input, select {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+}
+.form-input--inline {
+  flex-direction: row;
+  gap: 0.2rem;
+  align-items: baseline;
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.cluster button {
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  color: deeppink;
+  text-decoration: none;
+  font-weight: 600;
+  transition: backgroung 0.3s ease;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+.cluster button:hover {
+  background: lightpink;
+}
+.cluster button a:hover {
+  text-decoration: none;
+}

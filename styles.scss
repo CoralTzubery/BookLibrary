@@ -185,7 +185,53 @@ th, td {
     a {
         text-decoration: none;
     }
+}
 
+//orde-form
+input, select {
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+
+    &--inline {
+        flex-direction: row;
+        gap: 0.2rem;
+        align-items: baseline;
+    }
 
 }
+
+.cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    button {
+        border: 1px solid black;
+        border-radius: 5px;
+        background-color: white;
+        color: deeppink;
+        text-decoration: none;
+        font-weight: 600;
+        transition: backgroung 0.3s ease;
+        cursor: pointer;
+        padding: 0.4rem;
+    
+        &:hover {
+            background: lightpink;
+        }
+    
+        a {
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    
+    }
+}
+
 
