@@ -107,24 +107,24 @@ a:hover {
   gap: 2rem;
 }
 
-.book-card {
+.card {
+  display: grid;
+  grid-template-rows: repeat(4, auto);
   border: 1px solid black;
   border-radius: 5px;
   padding: 0.5rem;
-  width: 10rem;
-  height: 15rem;
-  font-size: 0.8rem;
   text-align: center;
 }
-.book-card > a {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-decoration: none;
+.card img {
+  max-width: 100%;
+  max-height: auto;
 }
-.book-card img {
-  height: 50%;
-  width: 100%;
+.card p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+.card a {
+  text-decoration: none;
 }
 
 th, td {
@@ -146,26 +146,6 @@ th, td {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
   gap: 20px;
-}
-
-.card {
-  display: grid;
-  grid-template-rows: repeat(4, auto);
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 0.5rem;
-  text-align: center;
-}
-.card img {
-  max-width: 100%;
-  max-height: auto;
-}
-.card p {
-  font-size: 16px;
-  margin: 5px 0;
-}
-.card a {
-  text-decoration: none;
 }
 
 input, select {

@@ -119,51 +119,6 @@ a {
     gap: 2rem;
 }
 
-.book-card {
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 0.5rem;
-    width: 10rem;
-    height: 15rem;
-    font-size: 0.8rem;
-    text-align: center;
-
-    > a {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        text-decoration: none;
-    }
-
-    img {
-        height: 50%;
-        width: 100%;
-    }
-}
-
-th, td {
-    border: 1px solid rgb(160 160 160);
-    padding: 8px 10px;
-  }
-
-.book-table {
-    border-collapse: collapse;
-    border: 2px solid rgb(140 140 140);
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    width: calc(100vw - 4rem);
-    text-align: center;
-}
-
-
-//library
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    gap: 20px;
-}
-    
 .card {
     display: grid;
     grid-template-rows: repeat(4, auto);
@@ -187,7 +142,27 @@ th, td {
     }
 }
 
-//orde-form
+th, td {
+    border: 1px solid rgb(160 160 160);
+    padding: 8px 10px;
+  }
+
+.book-table {
+    border-collapse: collapse;
+    border: 2px solid rgb(140 140 140);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    width: calc(100vw - 4rem);
+    text-align: center;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 20px;
+}
+    
 input, select {
     font-family: inherit;
     font-size: 1rem;
@@ -230,7 +205,6 @@ input, select {
                 text-decoration: none;
             }
         }
-    
     }
 }
 
