@@ -33,3 +33,19 @@ export function setupOrderForm() {
         });
     }
 }
+
+export function setupReportForm() {
+    const form = document.querySelector("form[name='report'") as HTMLFormElement;
+
+    if (form) {
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const bookDropdown = document.querySelector("#bookDropdown") as HTMLSelectElement;
+            const bookId = bookDropdown.value;
+
+            reportLostBook(bookId);
+            alert("Book reported as lost!");
+        });
+    }
+}

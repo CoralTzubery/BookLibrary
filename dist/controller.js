@@ -1,4 +1,4 @@
-import { orderBook, getBooks, onBooksUpdate } from "./model.js";
+import { orderBook, reportLostBook, getBooks, onBooksUpdate } from "./model.js";
 import { renderBooks } from "./view.js";
 onBooksUpdate(() => renderBooks(getBooks()));
 export function setupOrderForm() {
@@ -22,6 +22,18 @@ export function setupOrderForm() {
                 status: "Free",
             });
             form.reset();
+        });
+    }
+}
+export function setupReportForm() {
+    const form = document.querySelector("form[name='report'");
+    if (form) {
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const bookDropdown = document.querySelector("#bookDropdown");
+            const bookId = bookDropdown.value;
+            reportLostBook(bookId);
+            alert("Book reported as lost!");
         });
     }
 }
