@@ -48,7 +48,11 @@
             </div>
         </form>
     </main>
-</body>
 
-<script src="dist/controller.js"></script>
+    <script type="module">
+        import { init } from "./dist/controller.js";
+        
+        init();
+    </script>
+</body>
 </html>

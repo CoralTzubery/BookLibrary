@@ -1,95 +1,99 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <link rel="stylesheet" href="dist/styles.css" />
-  </head>
-  <body>
+</head>
+<body>
     <header>
       <nav class="site-nav">
-          <p class="brand">Libi</p>
-          <menu>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="library.html">Library</a></li>
-              <li><a href="order-form.html">Order a New Book</a></li>
-              <li><a href="report-form.html">Lost a Book?</a></li>
-              <li><a href="my-books.html">My Books</a></li>
-              <li><a href="#">log-in</a></li>
-          </menu>
+        <p class="brand">Libi</p>
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="library.html">Library</a></li>
+          <li><a href="order-form.html">Order a New Book</a></li>
+          <li><a href="report-form.html">Lost a Book?</a></li>
+          <li><a href="my-books.html">My Books</a></li>
+          <li><a href="#">log-in</a></li>
+        </menu>
       </nav>
     </header>
-    
+        
     <main class="stack">
       <h1>Libi's Books Collection</h1>
       <ul class="gallery">
-          <li class="card">
-            <a href="#">
-              <img src="pictures/Actingandreflecting.jpg" alt="Acting and Reflecting">
-              <p>Philosophy</p>
-              <p>Acting and Reflecting</p>
-              <p>Wilfried Sieg</p>
-              <button>action</button>
-            </a>
-          </li>
-          <li class="card">
-            <a href="#">
-              <img src="pictures/AGameofThrones.jpg" alt="A Game of Throns">
-              <p>Fiction</p>
-              <p>A Game of Throns</p>
-              <p>George R. R. Martin</p>
-              <button>action</button>
-            </a>
-          </li>
-          <li class="card">
-            <a href="#">
-              <img src="pictures/ChaoticPhenomenaInAstrophysics.jpg" alt="Chaotic Phenomena in Astrophysics">
-              <p>Science</p>
-              <p>Chaotic Phenomena in Astrophysics</p>
-              <p>J. R. Buchler</p>
-              <button>action</button>
-            </a>
-          </li>
-          <li class="card">
-            <a href="#">
-              <img src="pictures/HellisMyHeaven.jpg" alt="Hell is My Heaven">
-              <p>Romance</p>
-              <p>Hell is My Heaven</p>
-              <p>Jeneth Murrey</p>
-              <button>action</button>
-            </a>
-          </li>
-          <li class="card">
-            <a href="#">
-              <img src="pictures/MarriageUltimatum.jpg" alt="Marriage Ultimatum" >
-              <p>Romance</p>
-              <p>Marriage Ultimatum</p>
-              <p>Lindsay Armstrong</p>
-              <button>action</button>
-            </a>
-          </li>
-          <li class="card">
-            <a href="#">
-              <img src="pictures/TheTimeMachine.jpg" alt="The Time Machine">
-              <p>Fiction</p>
-              <p>The Time Machine</p>
-              <p>The Time Machine</p>
-              <button>action</button>
-            </a>
-          </li>
-          <li class="card">
-            <a href="#">
-              <img src="pictures/FearNoEvil.jpg" alt="Fear No Evil">
-              <p>Biography</p>
-              <p>Fear No Evil</p>
-              <p>Anatoly Shcharansky</p>
-              <button>action</button>
-            </a>
-          </li>
-      </ul>
-  </main>>
+        <li class="card">
+          <a href="#">
+            <img src="pictures/Actingandreflecting.jpg" alt="Acting and Reflecting">
+            <p>Philosophy</p>
+            <p>Acting and Reflecting</p>
+            <p>Wilfried Sieg</p>
+            <button>action</button>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <img src="pictures/AGameofThrones.jpg" alt="A Game of Throns">
+            <p>Fiction</p>
+            <p>A Game of Throns</p>
+            <p>George R. R. Martin</p>
+            <button>action</button>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <img src="pictures/ChaoticPhenomenaInAstrophysics.jpg" alt="Chaotic Phenomena in Astrophysics">
+            <p>Science</p>
+            <p>Chaotic Phenomena in Astrophysics</p>
+            <p>J. R. Buchler</p>
+            <button>action</button>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <img src="pictures/HellisMyHeaven.jpg" alt="Hell is My Heaven">
+            <p>Romance</p>
+            <p>Hell is My Heaven</p>
+            <p>Jeneth Murrey</p>
+            <button>action</button>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <img src="pictures/MarriageUltimatum.jpg" alt="Marriage Ultimatum" >
+            <p>Romance</p>
+            <p>Marriage Ultimatum</p>
+            <p>Lindsay Armstrong</p>
+            <button>action</button>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <img src="pictures/TheTimeMachine.jpg" alt="The Time Machine">
+            <p>Fiction</p>
+            <p>The Time Machine</p>
+            <p>The Time Machine</p>
+            <button>action</button>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <img src="pictures/FearNoEvil.jpg" alt="Fear No Evil">
+            <p>Biography</p>
+            <p>Fear No Evil</p>
+            <p>Anatoly Shcharansky</p>
+            <button>action</button>
+          </a>
+        </li>
+      </ul> 
+    </main>>
 
-  </body>
-  
-  </html>
+    <script type="module">
+        import { init } from "./dist/controller.js";
+            
+        init();
+    </script> 
+</body>
+</html>

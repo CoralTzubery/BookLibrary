@@ -37,3 +37,8 @@ export function setupReportForm() {
         });
     }
 }
+export function init() {
+    setupOrderForm();
+    setupReportForm();
+    renderBooks(getBooks());
+}
