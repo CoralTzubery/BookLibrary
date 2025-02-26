@@ -7,7 +7,7 @@ export function renderBooks(books: Book[]) {
     if (bookList) {
         bookList.innerHTML = books.map((book) => `
             <li class="card">
-                <a hred ="#">
+                <a href="#">
                     <img src="pictures/default.jpg" alt="${book.title}">
                     <p>${book.category}</p>
                     <p>${book.title}</p>

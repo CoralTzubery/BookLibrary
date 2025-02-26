@@ -1,4 +1,5 @@
 let books = [];
+let userBooks = [];
 let subscribers = [];
 export function orderBook(book) {
     if (books.some((b) => b.id === book.id)) {
@@ -22,4 +23,22 @@ export function onBooksUpdate(callback) {
 }
 export function notifySubscribers() {
     subscribers.forEach((callback) => callback());
+}
+export function getUserBook() {
+    return userBooks;
+}
+export function addBookToUser(book) {
+    userBooks.push(book);
+    notifySubscribers();
+}
+export function removeBookFromUser(bookId) {
+    userBooks = userBooks.filter((book) => book.id !== bookId);
+    notifySubscribers();
+}
+export function updateBookStatus(bookId, status) {
+    const book = books.find((b) => b.id === bookId);
+    if (book) {
+        book.status = status;
+        notifySubscribers();
+    }
 }

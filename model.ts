@@ -7,6 +7,7 @@ export type Book = {
 }
 
 let books: Book[] = [];
+let userBooks: Book[] = [];
 let subscribers: (() => void)[]= [];
 
 export function orderBook(book: Book) {
@@ -37,4 +38,27 @@ export function onBooksUpdate(callback: () => void) {
 
 export function notifySubscribers() {
     subscribers.forEach((callback) => callback());
+}
+
+export function getUserBook() {
+    return userBooks;
+}
+
+export function addBookToUser(book: Book) {
+    userBooks.push(book);
+    notifySubscribers();
+}
+
+export function removeBookFromUser(bookId: string) {
+    userBooks = userBooks.filter((book) => book.id !== bookId);
+    notifySubscribers();
+}
+
+export function updateBookStatus(bookId: string, status: "Free" | "Taken") {
+    const book = books.find((b) => b.id === bookId);
+
+    if (book) {
+        book.status = status;
+        notifySubscribers();
+    }
 }
