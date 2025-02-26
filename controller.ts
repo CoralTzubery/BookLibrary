@@ -1,4 +1,4 @@
-import { orderBook, reportLostBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser } from "./model.js";
+import { Book, orderBook, reportLostBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser, getUserBook } from "./model.js";
 import { renderBooks } from "./view.js";
 
 onBooksUpdate(() => renderBooks(getBooks()));
@@ -47,6 +47,8 @@ export function setupReportForm() {
             const bookDropdown = document.querySelector("#bookDropdown") as HTMLSelectElement;
             const bookId = bookDropdown.value;
 
+            const userBooks = getUserBook();//get userBooks from the model
+
             bookDropdown.innerHTML = userBooks.map(book => `<option value="<span class="math-inline">\{book\.id\}"\></span>{book.title}</option>`).join('');
 
             reportLostBook(bookId);
@@ -55,6 +57,7 @@ export function setupReportForm() {
         });
     }
 }
+
 
 export function borrowBook(bookId: string) {
     const book = getBooks().find((b) => b.id === bookId);
