@@ -1,4 +1,4 @@
-import { orderBook, reportLostBook, getBooks, onBooksUpdate } from "./model.js";
+import { orderBook, reportLostBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser } from "./model.js";
 import { renderBooks } from "./view.js";
 
 onBooksUpdate(() => renderBooks(getBooks()));
@@ -32,6 +32,28 @@ export function setupOrderForm() {
             form.reset();
         });
     }
+
+    const borrowButtons = bookTable.querySelectorAll(".borrow-button");
+    borrowButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const bookId = button.dataset.bookId;
+
+            if (bookId) {
+                borrowBook(bookId);
+            }
+        });
+    });
+    
+    const returnButtons = bookTable.querySelectorAll(".return-button");
+    returnButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const bookId = button.dataset.bookId;
+
+            if (bookId) {
+                returnBook(bookId);
+            }
+        });
+    });
 }
 
 export function setupReportForm() {
@@ -50,8 +72,23 @@ export function setupReportForm() {
     }
 }
 
+export function borrowBook(bookId: string) {
+    const book = getBooks().find((b) => b.id === bookId);
+
+    if (book) {
+        updateBookStatus(bookId, "Taken");
+        addBookToUser(book);
+    }
+}
+
+export function returnBook(bookId: string) {
+    updateBookStatus(bookId, "Free");
+    removeBookFromUser(bookId);
+}
+
 export function init() {
     setupOrderForm();
     setupReportForm();
     renderBooks(getBooks());
 }
+
