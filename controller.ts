@@ -32,28 +32,6 @@ export function setupOrderForm() {
             form.reset();
         });
     }
-
-    const borrowButtons = bookTable.querySelectorAll(".borrow-button");
-    borrowButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            const bookId = button.dataset.bookId;
-
-            if (bookId) {
-                borrowBook(bookId);
-            }
-        });
-    });
-    
-    const returnButtons = bookTable.querySelectorAll(".return-button");
-    returnButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            const bookId = button.dataset.bookId;
-
-            if (bookId) {
-                returnBook(bookId);
-            }
-        });
-    });
 }
 
 export function setupReportForm() {

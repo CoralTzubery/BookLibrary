@@ -185,3 +185,7 @@ input, select {
 .cluster button a:hover {
   text-decoration: none;
 }
+
+.hiddern {
+  display: noe;
+}
