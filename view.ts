@@ -21,52 +21,49 @@ export function renderBooks(books: Book[]) {
 
     if (bookTable) {
         bookTable.innerHTML = `
-            <thead>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Due-Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${books.map((book) => `
                 <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Category</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <td>${book.title}</td>
+                    <td>${book.author}</td>
+                    <td>${book.category}</td>
+                    <td>${'01.04.25'}</td>
+                    <td><button class="return-button" data-book-id="${book.id}">Return</button></td>
                 </tr>
-            </thead>
-            <tbody>
-                ${books.map((book) => `
-                    <tr>
-                        <td>${book.title}</td>
-                        <td>${book.author}</td>
-                        <td>${book.category}</td>
-                        <td>${book.status}</td>
-                        <td>
-                            <button class="borrow-button ${book.status === 'Taken' ? 'hidden' : ''}" data-book-id="${book.id}">Borrow</button>
-                            <button class="return-button ${book.status === 'Free' ? 'hidden' : ''}" data-book-id="${book.id}">Return</button>
-                        </td>
-                    </tr>
-                `).join("")}
-            </tbody>
+            `).join("")}
+        </tbody>
         `;
     }
+    
+    const borrowButtons = bookTable.querySelectorAll(".borrow-button");
+    borrowButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const bookId = button.dataset.bookId;
 
-        const borrowButtons = bookTable.querySelectorAll(".borrow-button");
-        borrowButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                const bookId = button.dataset.bookId;
-    
-                if (bookId) {
-                    borrowBook(bookId);
-                }
-            });
+            if (bookId) {
+                borrowBook(bookId);
+            }
         });
-        
-        const returnButtons = bookTable.querySelectorAll(".return-button");
-        returnButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                const bookId = button.dataset.bookId;
+    });
     
-                if (bookId) {
-                    returnBook(bookId);
-                }
-            });
+    const returnButtons = bookTable.querySelectorAll(".return-button");
+    returnButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const bookId = button.dataset.bookId;
+
+            if (bookId) {
+                returnBook(bookId);
+            }
         });
-    }
+    });
 }
+
