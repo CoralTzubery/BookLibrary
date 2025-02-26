@@ -38,7 +38,10 @@ export function renderBooks(books: Book[]) {
                     <td>${book.author}</td>
                     <td>${book.category}</td>
                     <td>${'01.04.25'}</td>
-                    <td><button class="return-button" data-book-id="${book.id}">Return</button></td>
+                    <td>
+                        <button class="borrow-button ${book.status === 'Taken' ? 'hidden' : ''}" data-book-id="${book.id}">Borrow</button>
+                        <button class="return-button ${book.status === 'Free' ? 'hidden' : ''}" data-book-id="${book.id}">Return</button>
+                    </td>
                 </tr>
             `).join("")}
         </tbody>
@@ -49,17 +52,15 @@ export function renderBooks(books: Book[]) {
         const target = event.target as HTMLElement;
         if (target.classList.contains('borrow-button')) {
             const bookId = target.dataset.bookId;
-
             if (bookId) {
                 borrowBook(bookId);
                 renderBooks(getBooks());
             }
         } else if (target.classList.contains('return-button')) {
             const bookId = target.dataset.bookId;
-
             if (bookId) {
                 returnBook(bookId);
-                renderBooks(getBooks());
+                renderBooks(getBooks()); 
             }
         }
     });
@@ -90,5 +91,22 @@ export function renderUserBooks(books: Book[]) {
             `).join("")}
         </tbody>
         `;
+    }
+}
+
+export function renderRecentlyAdded(books: Book[]) {
+    const recentlyAddedList = document.querySelector('.recently-added');
+    if (recentlyAddedList) {
+        recentlyAddedList.innerHTML = books.slice(0, 4).map(book => ` //slice(0,4) for the first 4 books
+            <li class="card">
+                <a href="#">
+                    <img src="pictures/default.jpg" alt="<span class="math-inline">\{book\.title\}"\> <p\>default picture for books without one yet</p\>
+                    <p>{book.category}</p>
+                    <p>book.title</p><p>{book.author}</p>
+                    <button class="borrow-button" data-book-id="book.id">{book.status === "Free" ? "Borrow" : "Taken"}</button>
+                    <button class="return-button" data-book-id="book.id">{book.status === "Free" ? "Return" : "Taken"}</button>
+                </a>
+            </li>
+        `).join('');
     }
 }
