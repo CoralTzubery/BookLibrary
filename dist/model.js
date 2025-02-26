@@ -18,6 +18,7 @@ export function getBooks() {
     return books;
 }
 export function onBooksUpdate(callback) {
+    subscribers.push(callback);
 }
 export function notifySubscribers() {
     subscribers.forEach((callback) => callback());

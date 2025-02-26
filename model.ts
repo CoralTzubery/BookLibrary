@@ -32,7 +32,7 @@ export function getBooks() {
 }
 
 export function onBooksUpdate(callback: () => void) {
-    
+    subscribers.push(callback);
 }
 
 export function notifySubscribers() {

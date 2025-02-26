@@ -1,4 +1,4 @@
-import { orderBook, reportLostBook } from "./model.js";
+import { orderBook, reportLostBook, getBooks, onBooksUpdate } from "./model.js";
 
 export function onOrderBookSumbit(formData: FormData) {
     const title = formData.get("title");
