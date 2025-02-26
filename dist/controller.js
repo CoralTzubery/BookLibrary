@@ -1,25 +1,27 @@
-import { orderBook } from "./model.js";
-export function onOrderBookSumbit(formData) {
-    const title = formData.get("title");
-    const author = formData.get("author");
-    const category = formData.get("category");
-    if (typeof title !== "string") {
-        throw new Error("The title must be a strin.");
+import { orderBook, getBooks, onBooksUpdate } from "./model.js";
+import { renderBooks } from "./view.js";
+onBooksUpdate(() => renderBooks(getBooks()));
+export function setupOrderForm() {
+    const form = document.querySelector("form[name='order-new'");
+    if (form) {
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const title = formData.get("title");
+            const author = formData.get("author");
+            const category = formData.get("category");
+            if (!title || !author || !category) {
+                throw new Error("All the fields must be filled");
+                return;
+            }
+            orderBook({
+                id: crypto.randomUUID().replace("-", "").slice(-8),
+                title,
+                author,
+                category,
+                status: "Free",
+            });
+            form.reset();
+        });
     }
-    if (typeof author !== "string") {
-        throw new Error("The author name must be a strin.");
-    }
-    if (typeof category !== "string") {
-        throw new Error("The category must be a strin.");
-    }
-    if (!title || !author || !category) {
-        throw new Error("All the lines must be filled");
-    }
-    orderBook({
-        id: crypto.randomUUID().replace("-", "").slice(-8),
-        title,
-        author,
-        category,
-        status: "Free",
-    });
 }
