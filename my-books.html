@@ -52,8 +52,11 @@
 
     <script type="module">
         import { init } from "./dist/controller.js";
-        
+        import { getUserBooks } from "./dist/model.js";
+        import { renderUserBooks } from "./dist.view.js";
+         
         init();
+        renderUserBooks(getUserBooks());
     </script>
 </body>
 </html>

@@ -22,6 +22,7 @@ export function setupOrderForm() {
                 status: "Free",
             });
             form.reset();
+            alert("Book orderd successfully");
         });
     }
 }
@@ -32,7 +33,9 @@ export function setupReportForm() {
             event.preventDefault();
             const bookDropdown = document.querySelector("#bookDropdown");
             const bookId = bookDropdown.value;
+            bookDropdown.innerHTML = userBooks.map(book => `<option value="<span class="math-inline">\{book\.id\}"\></span>{book.title}</option>`).join('');
             reportLostBook(bookId);
+            removeBookFromUser(bookId);
             alert("Book reported as lost!");
         });
     }
