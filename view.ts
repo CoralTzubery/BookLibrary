@@ -1,4 +1,4 @@
-import { Book, orderBook, reportLostBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser, getUserBook} from "./model.js";
+import { Book, getBooks, getUserBook} from "./model.js";
 import { borrowBook, returnBook } from "./controller.js";
 
 export function renderBooks(books: Book[]) {

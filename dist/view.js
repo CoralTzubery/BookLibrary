@@ -1,4 +1,4 @@
-import { getBooks, updateBookStatus, getUserBook } from "./model.js";
+import { getBooks, getUserBook } from "./model.js";
 import { borrowBook, returnBook } from "./controller.js";
 export function renderBooks(books) {
     const bookList = document.querySelector(".recently-added");

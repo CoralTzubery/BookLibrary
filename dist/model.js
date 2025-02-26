@@ -57,6 +57,9 @@ export function getUserBook() {
     return userBooks;
 }
 export function addBookToUser(book) {
+    const today = new Date();
+    const dueDate = new Date(today);
+    dueDate.setDate(today.getDate() + 14);
     userBooks.push(book);
     saveUserBooksToLocalStorage();
     notifySubscribers();
