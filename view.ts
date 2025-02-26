@@ -1,4 +1,4 @@
-import { Book, orderBook, reportLostBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser } from "./model.js";
+import { Book, orderBook, reportLostBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser, getUserBook} from "./model.js";
 import { borrowBook, returnBook } from "./controller.js";
 
 export function renderBooks(books: Book[]) {
@@ -95,5 +95,55 @@ export function renderUserBooks(books: Book[]) {
             `).join("")}
         </tbody>
         `;
+    }
+}
+
+export function renderMyBooks(books: Book[]) {
+    const bookTable = document.querySelector(".my-books") as HTMLTableElement; // שימו לב: my-books
+    if (bookTable) {
+        bookTable.innerHTML = `
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Due-Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${books.map((book) => `
+                <tr>
+                    <td>${book.title}</td>
+                    <td>${book.author}</td>
+                    <td>${book.category}</td>
+                    <td>${'01.04.25'}</td>
+                    <td><button class="return-button" data-book-id="${book.id}">Return</button></td>
+                </tr>
+            `).join("")}
+        </tbody>
+        `;
+
+        bookTable.addEventListener('click', (event) => {
+            const target = event.target as HTMLElement;
+            if (target.classList.contains('return-button')) {
+                const bookId = target.dataset.bookId;
+                if (bookId) {
+                    returnBook(bookId);
+                    removeRowFromTable(bookId);
+                    updateBookStatus(bookId, "Free");
+                    renderMyBooks(getUserBook()); 
+                    renderBooks(getBooks()); 
+                }
+            }
+        });
+    }
+}
+
+export function removeRowFromTable(bookId: string) {
+    const row = document.getElementById(`book-${bookId}`);
+
+    if (row) {
+        row.remove();
     }
 }
