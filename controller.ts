@@ -1,5 +1,5 @@
 import { Book, orderBook, reportLostBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser, getUserBook } from "./model.js";
-import { renderBooks, renderRecentlyAdded } from "./view.js";
+import { renderBooks } from "./view.js";
 
 onBooksUpdate(() => renderBooks(getBooks()));
 
@@ -76,5 +76,4 @@ export function init() {
     setupOrderForm();
     setupReportForm();
     renderBooks(getBooks());
-    renderRecentlyAdded(getBooks());
 }

@@ -1,5 +1,5 @@
 import { orderBook, reportLostBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser, getUserBook } from "./model.js";
-import { renderBooks, renderRecentlyAdded } from "./view.js";
+import { renderBooks } from "./view.js";
 onBooksUpdate(() => renderBooks(getBooks()));
 export function setupOrderForm() {
     const form = document.querySelector("form[name='order-new'");
@@ -56,5 +56,4 @@ export function init() {
     setupOrderForm();
     setupReportForm();
     renderBooks(getBooks());
-    renderRecentlyAdded(getBooks());
 }
