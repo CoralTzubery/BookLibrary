@@ -1,16 +1,25 @@
-export function onAddBookSumbit() {
-    const form = document.getElementById("order-new");
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const title = document.querySelector("#title").value;
-        const author = document.querySelector("#author").value;
-        const category = document.querySelector("#category").value;
-        if (!title || !author || !category) {
-            throw new Error("All the inputs must be filled");
-            return;
-        }
-        console.log("title:", title);
-        console.log("author:", author);
-        console.log("category:", category);
+import { orderBook } from "./model.js";
+export function onOrderBookSumbit(formData) {
+    const title = formData.get("title");
+    const author = formData.get("author");
+    const category = formData.get("category");
+    if (typeof title !== "string") {
+        throw new Error("The title must be a strin.");
+    }
+    if (typeof author !== "string") {
+        throw new Error("The author name must be a strin.");
+    }
+    if (typeof category !== "string") {
+        throw new Error("The category must be a strin.");
+    }
+    if (!title || !author || !category) {
+        throw new Error("All the lines must be filled");
+    }
+    orderBook({
+        id: crypto.randomUUID().replace("-", "").slice(-8),
+        title,
+        author,
+        category,
+        status: "Free",
     });
 }
