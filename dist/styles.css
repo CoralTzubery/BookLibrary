@@ -141,6 +141,15 @@ th, td {
   text-align: center;
 }
 
+.my-books {
+  border-collapse: collapse;
+  border: 2px solid #8c8c8c;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  width: calc(100vw - 4rem);
+  text-align: center;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

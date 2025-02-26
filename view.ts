@@ -26,7 +26,7 @@ export function renderBooks(books: Book[]) {
                 <th>Title</th>
                 <th>Author</th>
                 <th>Category</th>
-                <th>Due-Date</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -36,7 +36,7 @@ export function renderBooks(books: Book[]) {
                     <td>${book.title}</td>
                     <td>${book.author}</td>
                     <td>${book.category}</td>
-                    <td>${'01.04.25'}</td>
+                    <td>${book.status}</td>
                     <td>
                         <button class="borrow-button ${book.status === 'Taken' ? 'hidden' : ''}" data-book-id="${book.id}">Borrow</button>
                         <button class="return-button ${book.status === 'Free' ? 'hidden' : ''}" data-book-id="${book.id}">Return</button>
