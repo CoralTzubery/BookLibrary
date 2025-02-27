@@ -40,6 +40,14 @@ h2 {
 button {
     cursor: pointer;
     text-transform: uppercase;
+    color: deeppink;
+    font-weight: bold;
+    transition: backgroung 0.3s ease;
+
+    &:hover {
+        background: lightpink;
+        border-radius: 5px;
+    }
 }
 
 a {
@@ -142,7 +150,7 @@ a {
         color: gray;
 
         &:nth-child(2) {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
             color: deeppink;
         }
@@ -205,25 +213,9 @@ input, select {
     flex-wrap: wrap;
     gap: 0.5rem;
 
-    button {
-        border: 1px solid black;
-        border-radius: 5px;
-        background-color: white;
-        color: deeppink;
-        text-decoration: none;
-        font-weight: 600;
-        transition: backgroung 0.3s ease;
-        cursor: pointer;
-        padding: 0.4rem;
-    
+    a {
         &:hover {
-            background: lightpink;
-        }
-    
-        a {
-            &:hover {
-                text-decoration: none;
-            }
+            text-decoration: none;
         }
     }
 }

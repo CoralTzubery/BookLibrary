@@ -32,8 +32,10 @@ export function renderBooks(books) {
                         <td>${book.category}</td>
                         <td>${book.status}</td>
                         <td>
-                            <button class="borrow-button ${book.status === 'Taken' || book.status === 'Lost' ? 'hidden' : ''}" data-book-id="${book.id}">Borrow</button>
-                            <button class="return-button ${book.status === 'Free' || book.status === 'Lost' ? 'hidden' : ''}" data-book-id="${book.id}">Return</button>
+                            ${book.status !== "Lost" ?
+            `<button class="borrow-button ${book.status === 'Taken' ? 'hidden' : ''}" data-book-id="${book.id}">Borrow</button>
+                                <button class="return-button ${book.status === 'Free' ? 'hidden' : ''}" data-book-id="${book.id}">Return</button>` :
+            ""}
                         </td>
                     </tr>
                 `).join("")}
@@ -66,7 +68,7 @@ export function renderBooks(books) {
     });
 }
 export function renderMyBooks(books) {
-    const bookTable = document.querySelector(".my-books"); // שימו לב: my-books
+    const bookTable = document.querySelector(".my-books");
     if (bookTable) {
         bookTable.innerHTML = `
             <thead>
@@ -83,7 +85,11 @@ export function renderMyBooks(books) {
                         <td>${book.title}</td>
                         <td>${book.author}</td>
                         <td>${book.category}</td>
-                        <td><button class="return-button" data-book-id="${book.id}">Return</button></td>
+                        <td>
+                            ${book.status !== "Lost" ?
+            `<button class="return-button" data-book-id="${book.id}">Return</button>` :
+            ""}
+                        </td>
                     </tr>
                 `).join("")}
             </tbody>

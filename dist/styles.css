@@ -40,6 +40,13 @@ h2 {
 button {
   cursor: pointer;
   text-transform: uppercase;
+  color: deeppink;
+  font-weight: bold;
+  transition: backgroung 0.3s ease;
+}
+button:hover {
+  background: lightpink;
+  border-radius: 5px;
 }
 
 a {
@@ -127,7 +134,7 @@ a:hover {
   color: gray;
 }
 .card p:nth-child(2) {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   color: deeppink;
 }
@@ -185,21 +192,7 @@ input, select {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
-.cluster button {
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: white;
-  color: deeppink;
-  text-decoration: none;
-  font-weight: 600;
-  transition: backgroung 0.3s ease;
-  cursor: pointer;
-  padding: 0.4rem;
-}
-.cluster button:hover {
-  background: lightpink;
-}
-.cluster button a:hover {
+.cluster a:hover {
   text-decoration: none;
 }
 
