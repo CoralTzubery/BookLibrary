@@ -1,4 +1,4 @@
-import { orderBook, reportLostBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser, getUserBook } from "./model.js";
+import { orderBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser, getUserBook } from "./model.js";
 import { renderBooks } from "./view.js";
 onBooksUpdate(() => renderBooks(getBooks()));
 export function setupOrderForm() {
@@ -26,6 +26,13 @@ export function setupOrderForm() {
         });
     }
 }
+export function populateBookDropdowm() {
+    const bookDropdown = document.querySelector("#bookDropdown");
+    const userBooks = getUserBook();
+    if (bookDropdown) {
+        bookDropdown.innerHTML = userBooks.map(book => `<option value="${book.id}">${book.title}</option`).join('');
+    }
+}
 export function setupReportForm() {
     const form = document.querySelector("form[name='report'");
     if (form) {
@@ -33,9 +40,7 @@ export function setupReportForm() {
             event.preventDefault();
             const bookDropdown = document.querySelector("#bookDropdown");
             const bookId = bookDropdown.value;
-            const userBooks = getUserBook();
-            bookDropdown.innerHTML = userBooks.map(book => `<option value="<span class="math-inline">\{book\.id\}"\></span>{book.title}</option>`).join('');
-            reportLostBook(bookId);
+            updateBookStatus(bookId, "Lost");
             removeBookFromUser(bookId);
             alert("Book reported as lost!");
         });

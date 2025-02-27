@@ -35,8 +35,10 @@ export function renderBooks(books: Book[]) {
                         <td>${book.category}</td>
                         <td>${book.status}</td>
                         <td>
-                            <button class="borrow-button ${book.status === 'Taken' ? 'hidden' : ''}" data-book-id="${book.id}">Borrow</button>
-                            <button class="return-button ${book.status === 'Free' ? 'hidden' : ''}" data-book-id="${book.id}">Return</button>
+                        <td>
+                            <button class="borrow-button ${book.status === 'Taken' || book.status === 'Lost' ? 'hidden' : ''}" data-book-id="${book.id}">Borrow</button>
+                            <button class="return-button ${book.status === 'Free' || book.status === 'Lost' ? 'hidden' : ''}" data-book-id="${book.id}">Return</button>
+                        </td>
                         </td>
                     </tr>
                 `).join("")}

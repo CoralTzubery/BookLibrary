@@ -37,6 +37,15 @@ export function setupOrderForm() {
 
 }
 
+export function populateBookDropdowm () {
+    const bookDropdown = document.querySelector("#bookDropdown") as HTMLSelectElement;
+    const userBooks = getUserBook();
+
+    if (bookDropdown) {
+        bookDropdown.innerHTML = userBooks.map(book => `<option value="${book.id}">${book.title}</option`).join('');
+    }
+}
+
 export function setupReportForm() {
     const form = document.querySelector("form[name='report'") as HTMLFormElement;
 
@@ -47,12 +56,9 @@ export function setupReportForm() {
             const bookDropdown = document.querySelector("#bookDropdown") as HTMLSelectElement;
             const bookId = bookDropdown.value;
 
-            const userBooks = getUserBook();
-
-            bookDropdown.innerHTML = userBooks.map(book => `<option value="<span class="math-inline">\{book\.id\}"\></span>{book.title}</option>`).join('');
-
-            reportLostBook(bookId);
+            updateBookStatus(bookId, "Lost");
             removeBookFromUser(bookId);
+
             alert("Book reported as lost!");
         });
     }

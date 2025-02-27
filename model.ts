@@ -3,7 +3,7 @@ export type Book = {
     title: string,
     author: string;
     category: string,
-    status: "Free" | "Taken",
+    status: "Free" | "Taken" | "Lost",
 }
 
 let books: Book[] = loadBooksFromLocalStorage();
