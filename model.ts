@@ -4,7 +4,7 @@ export type Book = {
     author: string;
     category: string,
     status: "Free" | "Taken",
-    dueDate?: Data;
+    dueDate?: Date;
 }
 
 let books: Book[] = loadBooksFromLocalStorage();

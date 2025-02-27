@@ -21,37 +21,39 @@ export function renderBooks(books: Book[]) {
 
     if (bookTable) {
         bookTable.innerHTML = `
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Category</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            ${books.map((book) => `
+            <thead>
                 <tr>
-                    <td>${book.title}</td>
-                    <td>${book.author}</td>
-                    <td>${book.category}</td>
-                    <td>${book.status}</td>
-                    <td>
-                        <button class="borrow-button ${book.status === 'Taken' ? 'hidden' : ''}" data-book-id="${book.id}">Borrow</button>
-                        <button class="return-button ${book.status === 'Free' ? 'hidden' : ''}" data-book-id="${book.id}">Return</button>
-                    </td>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
-            `).join("")}
-        </tbody>
+            </thead>
+            <tbody>
+                ${books.map((book) => `
+                    <tr>
+                        <td>${book.title}</td>
+                        <td>${book.author}</td>
+                        <td>${book.category}</td>
+                        <td>${book.status}</td>
+                        <td>
+                            <button class="borrow-button ${book.status === 'Taken' ? 'hidden' : ''}" data-book-id="${book.id}">Borrow</button>
+                            <button class="return-button ${book.status === 'Free' ? 'hidden' : ''}" data-book-id="${book.id}">Return</button>
+                        </td>
+                    </tr>
+                `).join("")}
+            </tbody>
         `;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
         const bookTable = document.querySelector('.book-table') as HTMLTableElement;
+        
         if (bookTable) {
             bookTable.addEventListener('click', (event) => {
                 const target = event.target as HTMLElement;
+                
                 if (target.classList.contains('borrow-button')) {
                     const bookId = target.dataset.bookId;
 
@@ -60,8 +62,10 @@ export function renderBooks(books: Book[]) {
                         renderBooks(getBooks());
                         renderMyBooks(getUserBook());
                     }
+            
                 } else if (target.classList.contains('return-button')) {
                     const bookId = target.dataset.bookId;
+
                     if (bookId) {
                         returnBook(bookId);
                         renderBooks(getBooks());
@@ -73,69 +77,71 @@ export function renderBooks(books: Book[]) {
     });
 }
 
-export function renderUserBooks(books: Book[]) {
-    const bookTable = document.querySelector(".book-table") as HTMLTableElement;
-    if (bookTable) {
-        bookTable.innerHTML = `
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Category</th>
-                <th>Due-Date</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            ${books.map((book) => `
-                <tr>
-                    <td>${book.title}</td>
-                    <td>${book.author}</td>
-                    <td>${book.category}</td>
-                    <td>${'01.04.25'}</td>
-                    <td><button class="return-button" data-book-id="${book.id}">Return</button></td>
-                </tr>
-            `).join("")}
-        </tbody>
-        `;
-    }
-}
+// export function renderUserBooks(books: Book[]) {
+//     const bookTable = document.querySelector(".book-table") as HTMLTableElement;
+//     if (bookTable) {
+//         bookTable.innerHTML = `
+//         <thead>
+//             <tr>
+//                 <th>Title</th>
+//                 <th>Author</th>
+//                 <th>Category</th>
+//                 <th>Due-Date</th>
+//                 <th>Action</th>
+//             </tr>
+//         </thead>
+//         <tbody>
+//             ${books.map((book) => `
+//                 <tr>
+//                     <td>${book.title}</td>
+//                     <td>${book.author}</td>
+//                     <td>${book.category}</td>
+//                     <td>${'01.04.25'}</td>
+//                     <td><button class="return-button" data-book-id="${book.id}">Return</button></td>
+//                 </tr>
+//             `).join("")}
+//         </tbody>
+//         `;
+//     }
+// }
 
 export function renderMyBooks(books: Book[]) {
     const bookTable = document.querySelector(".my-books") as HTMLTableElement; // שימו לב: my-books
+    
     if (bookTable) {
         bookTable.innerHTML = `
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Category</th>
-                <th>Due-Date</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            ${books.map((book) => `
+            <thead>
                 <tr>
-                    <td>${book.title}</td>
-                    <td>${book.author}</td>
-                    <td>${book.category}</td>
-                    <td>${book.dueDate ? book.dueDate.toLocaleDateString() : ''}</td>
-                    <td><button class="return-button" data-book-id="${book.id}">Return</button></td>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Due-Date</th>
+                    <th>Action</th>
                 </tr>
-            `).join("")}
-        </tbody>
+            </thead>
+            <tbody>
+                ${books.map((book) => `
+                    <tr>
+                        <td>${book.title}</td>
+                        <td>${book.author}</td>
+                        <td>${book.category}</td>
+                        <td>${book.dueDate ? book.dueDate.toLocaleDateString() : ''}</td>
+                        <td><button class="return-button" data-book-id="${book.id}">Return</button></td>
+                    </tr>
+                `).join("")}
+            </tbody>
         `;
+
 
         bookTable.addEventListener('click', (event) => {
             const target = event.target as HTMLElement;
+            
             if (target.classList.contains('return-button')) {
                 const bookId = target.dataset.bookId;
+
                 if (bookId) {
                     returnBook(bookId);
-                    removeRowFromTable(bookId);
-                    updateBookStatus(bookId, "Free");
-                    renderMyBooks(getUserBook()); 
+                    renderMyBooks(getUserBook());
                     renderBooks(getBooks()); 
                 }
             }
