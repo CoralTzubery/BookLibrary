@@ -4,6 +4,7 @@ export type Book = {
     author: string;
     category: string,
     status: "Free" | "Taken" | "Lost",
+    owner?: string,
 }
 
 export interface User {
@@ -13,7 +14,6 @@ export interface User {
 }
 
 let books: Book[] = loadBooksFromLocalStorage();
-// let userBooks: Book[] = loadUserBooksFromLocalStorage();
 let users: User[] = loadUsersFromLocalStorage();
 let subscribers: (() => void)[]= [];
 
@@ -48,9 +48,9 @@ function loadBooksFromLocalStorage(): Book[] {
         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "A Game of Throns", author: "George R. R. Martin", category: "Science", status: "Free" },
         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Chaotic Phenomena in Astrophysics", author: "J. R. Buchler", category: "Fiction", status: "Free" },
         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Hell is My Heaven", author: "Jeneth Murrey", category: "Romance", status: "Free" },
-        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Marriage Ultimatum", author: "Lindsay Armstrong", category: "Romance", status: "Taken" },
-        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "The Time Machine", author: "Lindsay Armstrong", category: "Fiction", status: "Taken" },
-        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Fear No Evil", author: "Anatoly Shcharansky", category: "Biography", status: "Taken" }
+        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Marriage Ultimatum", author: "Lindsay Armstrong", category: "Romance", status: "Free" },
+        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "The Time Machine", author: "Lindsay Armstrong", category: "Fiction", status: "Free" },
+        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Fear No Evil", author: "Anatoly Shcharansky", category: "Biography", status: "Free" }
     ];
 }
 
@@ -63,22 +63,6 @@ export function loadUsersFromLocalStorage(): User[] {
     
     return storedUserd ? JSON.parse(storedUserd) : [];
 }
-
-// function saveUserBooksToLocalStorage() {
-//     localStorage.setItem('userBooks', JSON.stringify(userBooks));
-// }
-
-// function loadUserBooksFromLocalStorage(): Book[] {
-//     const storedUserBooks = localStorage.getItem('userBooks');
-//     const loadedBooks = storedUserBooks ? JSON.parse(storedUserBooks) : [
-//         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Acting and Reflecting", author: "Wilfried Sieg", category: "Philosophy", status: "Taken" },
-//         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Marriage Ultimatum", author: "Lindsay Armstrong", category: "Romance", status: "Taken" },
-//         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "The Time Machine", author: "Lindsay Armstrong", category: "Fiction", status: "Taken" },
-//         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Fear No Evil", author: "Anatoly Shcharansky", category: "Biography", status: "Taken" },
-//     ];
-
-//     return loadedBooks;
-// }
 
 export function orderBook(book: Book) {
     if (books.some((b) => b.id === book.id)) {
@@ -116,14 +100,11 @@ export function addBookToUser(username: string, book: Book) {
     const user = users.find((u => u.username === username)); 
 
     if (user) {
+        book.owner = username;
         user.borrowedBooks.push(book);
         saveUsersToLocalStorage();
         notifySubscribers();
     }
-
-    // userBooks.push(book);
-    // saveUserBooksToLocalStorage();
-    // notifySubscribers();
 }
 
 export function removeBookFromUser(username: string, bookId: string) {
@@ -134,9 +115,6 @@ export function removeBookFromUser(username: string, bookId: string) {
         saveUsersToLocalStorage();
         notifySubscribers();
     }
-    // userBooks = userBooks.filter((book) => book.id !== bookId);
-    // saveUserBooksToLocalStorage();
-    // notifySubscribers();
 }
 
 export function updateBookStatus(bookId: string, status: "Free" | "Taken" | "Lost") {
@@ -156,9 +134,6 @@ export function getBorrowedBooks(username: string) {
     return user ? user.borrowedBooks: [];
 }
 
-// export function getUserBook() {
-//     return userBooks;
-// }
 
 
 

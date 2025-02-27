@@ -1,5 +1,4 @@
 let books = loadBooksFromLocalStorage();
-// let userBooks: Book[] = loadUserBooksFromLocalStorage();
 let users = loadUsersFromLocalStorage();
 let subscribers = [];
 export function createUser(user) {
@@ -27,9 +26,9 @@ function loadBooksFromLocalStorage() {
         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "A Game of Throns", author: "George R. R. Martin", category: "Science", status: "Free" },
         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Chaotic Phenomena in Astrophysics", author: "J. R. Buchler", category: "Fiction", status: "Free" },
         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Hell is My Heaven", author: "Jeneth Murrey", category: "Romance", status: "Free" },
-        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Marriage Ultimatum", author: "Lindsay Armstrong", category: "Romance", status: "Taken" },
-        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "The Time Machine", author: "Lindsay Armstrong", category: "Fiction", status: "Taken" },
-        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Fear No Evil", author: "Anatoly Shcharansky", category: "Biography", status: "Taken" }
+        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Marriage Ultimatum", author: "Lindsay Armstrong", category: "Romance", status: "Free" },
+        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "The Time Machine", author: "Lindsay Armstrong", category: "Fiction", status: "Free" },
+        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Fear No Evil", author: "Anatoly Shcharansky", category: "Biography", status: "Free" }
     ];
 }
 export function saveUsersToLocalStorage() {
@@ -39,19 +38,6 @@ export function loadUsersFromLocalStorage() {
     const storedUserd = localStorage.getItem("users");
     return storedUserd ? JSON.parse(storedUserd) : [];
 }
-// function saveUserBooksToLocalStorage() {
-//     localStorage.setItem('userBooks', JSON.stringify(userBooks));
-// }
-// function loadUserBooksFromLocalStorage(): Book[] {
-//     const storedUserBooks = localStorage.getItem('userBooks');
-//     const loadedBooks = storedUserBooks ? JSON.parse(storedUserBooks) : [
-//         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Acting and Reflecting", author: "Wilfried Sieg", category: "Philosophy", status: "Taken" },
-//         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Marriage Ultimatum", author: "Lindsay Armstrong", category: "Romance", status: "Taken" },
-//         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "The Time Machine", author: "Lindsay Armstrong", category: "Fiction", status: "Taken" },
-//         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Fear No Evil", author: "Anatoly Shcharansky", category: "Biography", status: "Taken" },
-//     ];
-//     return loadedBooks;
-// }
 export function orderBook(book) {
     if (books.some((b) => b.id === book.id)) {
         throw new Error("Somebody already asked to order this book");
@@ -80,13 +66,11 @@ export function notifySubscribers() {
 export function addBookToUser(username, book) {
     const user = users.find((u => u.username === username));
     if (user) {
+        book.owner = username;
         user.borrowedBooks.push(book);
         saveUsersToLocalStorage();
         notifySubscribers();
     }
-    // userBooks.push(book);
-    // saveUserBooksToLocalStorage();
-    // notifySubscribers();
 }
 export function removeBookFromUser(username, bookId) {
     const user = users.find((u => u.username === username));
@@ -95,9 +79,6 @@ export function removeBookFromUser(username, bookId) {
         saveUsersToLocalStorage();
         notifySubscribers();
     }
-    // userBooks = userBooks.filter((book) => book.id !== bookId);
-    // saveUserBooksToLocalStorage();
-    // notifySubscribers();
 }
 export function updateBookStatus(bookId, status) {
     const book = books.find((b) => b.id === bookId);
@@ -111,6 +92,3 @@ export function getBorrowedBooks(username) {
     const user = users.find((u) => u.username === username);
     return user ? user.borrowedBooks : [];
 }
-// export function getUserBook() {
-//     return userBooks;
-// }

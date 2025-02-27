@@ -76,10 +76,13 @@ export function borrowBook(bookId: string) {
 
 export function returnBook(bookId: string) {
     const username = localStorage.getItem("currentUser");
+    const book = getBooks().find((b) => b.id === bookId);
 
-    if(username) {
+    if(username && book && book.owner === username) {
         updateBookStatus(bookId, "Free");
         removeBookFromUser(username, bookId);
+    } else {
+        alert("You don't owen this book.");
     }
 }
 
