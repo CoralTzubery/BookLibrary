@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="dist/styles.css" />
 </head>
 <body>
@@ -19,30 +19,30 @@
             </menu>
         </nav>
     </header>
-    
-    <main class="stack">
-        <h1>Login</h1>
 
-        <form class="stack" id="login-form">
+    <main class="stack">
+        <h1>Sign Up</h1>
+
+        <form class="stack" id="signup-form">
             <div class="form-input">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required autofocus>
             </div>
             <div class="form-input">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" name="password" id="password" required>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit">Sign Up</button>
         </form>
 
         <p>
-            Don't have an acount?
-            <a href="signup.html">Sign Up</a>
+            Already have an account?
+            <a href="login.html">Login</a>
         </p>
     </main>
 
     <script type="module">
-        import { init } from "./dist/controller.js";
+        import { init } from "/.dist/controller.js"
 
         init();
     </script>
