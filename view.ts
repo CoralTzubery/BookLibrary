@@ -12,8 +12,7 @@ export function renderBooks(books: Book[]) {
                     <p>${book.category}</p>
                     <p>${book.title}</p>
                     <p>${book.author}</p>
-                    <button class="borrow-button" data-book-id="${book.id}">${book.status === "Free" ? "Borrow" : "Taken"}</button>
-                    <button class="return-button" data-book-id="${book.id}">${book.status === "Free" ? "Return" : "Taken"}</button>
+                    <td>${book.status}</td>
                 </a>
             </li>
         `).join("");
@@ -115,7 +114,6 @@ export function renderMyBooks(books: Book[]) {
                     <th>Title</th>
                     <th>Author</th>
                     <th>Category</th>
-                    <th>Due-Date</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -125,7 +123,6 @@ export function renderMyBooks(books: Book[]) {
                         <td>${book.title}</td>
                         <td>${book.author}</td>
                         <td>${book.category}</td>
-                        <td>${book.dueDate ? book.dueDate.toLocaleDateString() : ''}</td>
                         <td><button class="return-button" data-book-id="${book.id}">Return</button></td>
                     </tr>
                 `).join("")}
@@ -135,7 +132,7 @@ export function renderMyBooks(books: Book[]) {
 
         bookTable.addEventListener('click', (event) => {
             const target = event.target as HTMLElement;
-            
+
             if (target.classList.contains('return-button')) {
                 const bookId = target.dataset.bookId;
 

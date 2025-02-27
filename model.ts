@@ -4,7 +4,6 @@ export type Book = {
     author: string;
     category: string,
     status: "Free" | "Taken",
-    dueDate?: Date;
 }
 
 let books: Book[] = loadBooksFromLocalStorage();
@@ -35,12 +34,15 @@ function saveUserBooksToLocalStorage() {
 
 function loadUserBooksFromLocalStorage(): Book[] {
     const storedUserBooks = localStorage.getItem('userBooks');
-    return storedUserBooks ? JSON.parse(storedUserBooks) : [
+    const loadedBooks = storedUserBooks ? JSON.parse(storedUserBooks) : [
         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Acting and Reflecting", author: "Wilfried Sieg", category: "Philosophy", status: "Taken" },
         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Marriage Ultimatum", author: "Lindsay Armstrong", category: "Romance", status: "Taken" },
         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "The Time Machine", author: "Lindsay Armstrong", category: "Fiction", status: "Taken" },
         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Fear No Evil", author: "Anatoly Shcharansky", category: "Biography", status: "Taken" },
     ];
+    console.log(loadedBooks);
+    return loadedBooks;
+
 }
 
 export function orderBook(book: Book) {
@@ -80,10 +82,6 @@ export function getUserBook() {
 }
 
 export function addBookToUser(book: Book) {
-    const today = new Date();
-    const dueDate = new Date(today);
-    dueDate.setDate(today.getDate() + 14);
-
     userBooks.push(book);
     saveUserBooksToLocalStorage();
     notifySubscribers();
