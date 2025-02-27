@@ -28,11 +28,13 @@ ul, menu{
 
 h1 {
     font-size: 1.6rem;
+    color: deeppink;
 }
 
 h2 {
     font-size: 1.2rem;
     margin-top: 2rem;
+    color: pink;
 }
 
 button {
@@ -115,8 +117,9 @@ a {
 
 .recently-added {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
 }
 
 .card {
@@ -125,7 +128,7 @@ a {
     border: 1px solid black;
     border-radius: 5px;
     padding: 0.5rem;
-    text-align: center;
+    text-align: center
         
     img {
         max-width: 100%;
@@ -135,6 +138,13 @@ a {
     p {
         font-size: 16px;
         margin: 5px 0;
+        color: gray;
+
+        &:nth-child(2) {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: deeppink;
+        }
     }
 
     a {

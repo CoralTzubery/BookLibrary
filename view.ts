@@ -74,34 +74,6 @@ export function renderBooks(books: Book[]) {
     });
 }
 
-// export function renderUserBooks(books: Book[]) {
-//     const bookTable = document.querySelector(".book-table") as HTMLTableElement;
-//     if (bookTable) {
-//         bookTable.innerHTML = `
-//         <thead>
-//             <tr>
-//                 <th>Title</th>
-//                 <th>Author</th>
-//                 <th>Category</th>
-//                 <th>Due-Date</th>
-//                 <th>Action</th>
-//             </tr>
-//         </thead>
-//         <tbody>
-//             ${books.map((book) => `
-//                 <tr>
-//                     <td>${book.title}</td>
-//                     <td>${book.author}</td>
-//                     <td>${book.category}</td>
-//                     <td>${'01.04.25'}</td>
-//                     <td><button class="return-button" data-book-id="${book.id}">Return</button></td>
-//                 </tr>
-//             `).join("")}
-//         </tbody>
-//         `;
-//     }
-// }
-
 export function renderMyBooks(books: Book[]) {
     const bookTable = document.querySelector(".my-books") as HTMLTableElement; // שימו לב: my-books
     

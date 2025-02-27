@@ -28,11 +28,13 @@ ul, menu {
 
 h1 {
   font-size: 1.6rem;
+  color: deeppink;
 }
 
 h2 {
   font-size: 1.2rem;
   margin-top: 2rem;
+  color: pink;
 }
 
 button {
@@ -103,8 +105,9 @@ a:hover {
 
 .recently-added {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .card {
@@ -113,15 +116,19 @@ a:hover {
   border: 1px solid black;
   border-radius: 5px;
   padding: 0.5rem;
-  text-align: center;
-}
-.card img {
-  max-width: 100%;
-  max-height: auto;
+  text-align: center img;
+  text-align-max-width: 100%;
+  text-align-max-height: auto;
 }
 .card p {
   font-size: 16px;
   margin: 5px 0;
+  color: gray;
+}
+.card p:nth-child(2) {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: deeppink;
 }
 .card a {
   text-decoration: none;
