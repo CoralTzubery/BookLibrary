@@ -4,6 +4,7 @@ export type Book = {
     author: string;
     category: string,
     status: "Free" | "Taken",
+    dueDate?: Data;
 }
 
 let books: Book[] = loadBooksFromLocalStorage();
@@ -82,7 +83,7 @@ export function addBookToUser(book: Book) {
     const today = new Date();
     const dueDate = new Date(today);
     dueDate.setDate(today.getDate() + 14);
-    
+
     userBooks.push(book);
     saveUserBooksToLocalStorage();
     notifySubscribers();

@@ -53,6 +53,7 @@ export function renderBooks(books) {
                     if (bookId) {
                         borrowBook(bookId);
                         renderBooks(getBooks());
+                        renderMyBooks(getUserBook());
                     }
                 }
                 else if (target.classList.contains('return-button')) {
@@ -60,6 +61,7 @@ export function renderBooks(books) {
                     if (bookId) {
                         returnBook(bookId);
                         renderBooks(getBooks());
+                        renderMyBooks(getUserBook());
                     }
                 }
             });
@@ -112,7 +114,7 @@ export function renderMyBooks(books) {
                     <td>${book.title}</td>
                     <td>${book.author}</td>
                     <td>${book.category}</td>
-                    <td>${'01.04.25'}</td>
+                    <td>${book.dueDate ? book.dueDate.toLocaleDateString() : ''}</td>
                     <td><button class="return-button" data-book-id="${book.id}">Return</button></td>
                 </tr>
             `).join("")}
