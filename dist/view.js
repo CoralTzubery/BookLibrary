@@ -9,7 +9,7 @@ export function renderBooks(books) {
                 <p>${book.category}</p>
                 <p>${book.title}</p>
                 <p>${book.author}</p>
-                <td>${book.status}</td>
+                <p>${book.status}</p>
             </li>
         `).join("");
     }
@@ -32,10 +32,8 @@ export function renderBooks(books) {
                         <td>${book.category}</td>
                         <td>${book.status}</td>
                         <td>
-                        <td>
                             <button class="borrow-button ${book.status === 'Taken' || book.status === 'Lost' ? 'hidden' : ''}" data-book-id="${book.id}">Borrow</button>
                             <button class="return-button ${book.status === 'Free' || book.status === 'Lost' ? 'hidden' : ''}" data-book-id="${book.id}">Return</button>
-                        </td>
                         </td>
                     </tr>
                 `).join("")}

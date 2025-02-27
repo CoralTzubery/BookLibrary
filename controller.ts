@@ -33,21 +33,19 @@ export function setupOrderForm() {
             alert("Book orderd successfully");
         });
     }
-
-
 }
 
-export function populateBookDropdowm () {
+export function populateBooksDropdown() {
     const bookDropdown = document.querySelector("#bookDropdown") as HTMLSelectElement;
     const userBooks = getUserBook();
 
     if (bookDropdown) {
-        bookDropdown.innerHTML = userBooks.map(book => `<option value="${book.id}">${book.title}</option`).join('');
+        bookDropdown.innerHTML = userBooks.map(book => `<option value="${book.id}">${book.title}</option>`).join('');
     }
 }
 
 export function setupReportForm() {
-    const form = document.querySelector("form[name='report'") as HTMLFormElement;
+    const form = document.querySelector("#report-form") as HTMLFormElement;
 
     if (form) {
         form.addEventListener("submit", (event) => {
@@ -81,5 +79,6 @@ export function returnBook(bookId: string) {
 export function init() {
     setupOrderForm();
     setupReportForm();
+    populateBooksDropdown();
     renderBooks(getBooks());
 }

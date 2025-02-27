@@ -93,7 +93,7 @@ export function removeBookFromUser(bookId: string) {
     notifySubscribers();
 }
 
-export function updateBookStatus(bookId: string, status: "Free" | "Taken") {
+export function updateBookStatus(bookId: string, status: "Free" | "Taken" | "Lost") {
     const book = books.find((b) => b.id === bookId);
 
     if (book) {

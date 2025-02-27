@@ -47,9 +47,11 @@
     </main>
 
     <script type="module">
-        import { init } from "./dist/controller.js";
+        import { init, populateBooksDropdown, setupReportForm } from "./dist/controller.js";
         
         init();
+        populateBooksDropdown();
+        setupReportForm();
     </script>
 </body>
 </html>

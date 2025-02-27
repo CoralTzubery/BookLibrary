@@ -26,15 +26,15 @@ export function setupOrderForm() {
         });
     }
 }
-export function populateBookDropdowm() {
+export function populateBooksDropdown() {
     const bookDropdown = document.querySelector("#bookDropdown");
     const userBooks = getUserBook();
     if (bookDropdown) {
-        bookDropdown.innerHTML = userBooks.map(book => `<option value="${book.id}">${book.title}</option`).join('');
+        bookDropdown.innerHTML = userBooks.map(book => `<option value="${book.id}">${book.title}</option>`).join('');
     }
 }
 export function setupReportForm() {
-    const form = document.querySelector("form[name='report'");
+    const form = document.querySelector("#report-form");
     if (form) {
         form.addEventListener("submit", (event) => {
             event.preventDefault();
@@ -60,5 +60,6 @@ export function returnBook(bookId) {
 export function init() {
     setupOrderForm();
     setupReportForm();
+    populateBooksDropdown();
     renderBooks(getBooks());
 }
