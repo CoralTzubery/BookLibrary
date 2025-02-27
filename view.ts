@@ -139,3 +139,17 @@ export function removeRowFromTable(bookId: string) {
         row.remove();
     }
 }
+
+export function displayCurrentUser() {
+    console.log("displayCurrentUser called");
+    const username = localStorage.getItem("currentUser");
+    const currentUserElement = document.getElementById("current-user");
+
+    if (currentUserElement) {
+        if (username) {
+            currentUserElement.textContent = `Hello, ${username}`;
+        } else {
+            currentUserElement.textContent = "";
+        }
+    }
+}

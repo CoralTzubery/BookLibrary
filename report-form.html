@@ -16,6 +16,7 @@
                 <li><a href="report-form.html">Lost a Book?</a></li>
                 <li><a href="my-books.html">My Books</a></li>
                 <li><a href="login.html">Login</a></li>
+                <span id="current-user"></span>
             </menu>
         </nav>
     </header>
@@ -48,10 +49,12 @@
 
     <script type="module">
         import { init, populateBooksDropdown, setupReportForm } from "./dist/controller.js";
+        import { displayCurrentUser } from "./dist/view.js";
         
         init();
         populateBooksDropdown();
         setupReportForm();
+        displayCurrentUser();
     </script>
 </body>
 </html>
