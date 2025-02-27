@@ -8,12 +8,10 @@ export function renderBooks(books: Book[]) {
     if (bookList) {
         bookList.innerHTML = books.map((book) => `
             <li class="card">
-                <a href="#">
-                    <p>${book.category}</p>
-                    <p>${book.title}</p>
-                    <p>${book.author}</p>
-                    <td>${book.status}</td>
-                </a>
+                <p>${book.category}</p>
+                <p>${book.title}</p>
+                <p>${book.author}</p>
+                <td>${book.status}</td>
             </li>
         `).join("");
     }
