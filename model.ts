@@ -6,10 +6,36 @@ export type Book = {
     status: "Free" | "Taken" | "Lost",
 }
 
+export interface User {
+    username: string;
+    password: string;
+    borrowedBooks: Book[];
+}
+
 let books: Book[] = loadBooksFromLocalStorage();
-let userBooks: Book[] = loadUserBooksFromLocalStorage();
+// let userBooks: Book[] = loadUserBooksFromLocalStorage();
+let users: User[] = loadUsersFromLocalStorage();
 let subscribers: (() => void)[]= [];
 
+export function createUser(user: User) {
+    if (users.some((u) => u.username === user.username)) {
+        throw new Error("Username already exists!");
+    }
+
+    users.push(user);
+    saveUsersToLocalStorage();
+    notifySubscribers();
+}
+
+export function authenticateUser(username: string, password: string) {
+    const user = users.find((u) => u.username === username);
+
+    if (!user || user.password !== password) {
+        throw new Error("Invalid user");
+    }
+
+    return user;
+}
 
 function saveBooksToLocalStorage() {
     localStorage.setItem('books', JSON.stringify(books));
@@ -28,22 +54,31 @@ function loadBooksFromLocalStorage(): Book[] {
     ];
 }
 
-function saveUserBooksToLocalStorage() {
-    localStorage.setItem('userBooks', JSON.stringify(userBooks));
+export function saveUsersToLocalStorage(){
+    localStorage.setItem("users", JSON.stringify(users));
 }
 
-function loadUserBooksFromLocalStorage(): Book[] {
-    const storedUserBooks = localStorage.getItem('userBooks');
-    const loadedBooks = storedUserBooks ? JSON.parse(storedUserBooks) : [
-        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Acting and Reflecting", author: "Wilfried Sieg", category: "Philosophy", status: "Taken" },
-        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Marriage Ultimatum", author: "Lindsay Armstrong", category: "Romance", status: "Taken" },
-        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "The Time Machine", author: "Lindsay Armstrong", category: "Fiction", status: "Taken" },
-        { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Fear No Evil", author: "Anatoly Shcharansky", category: "Biography", status: "Taken" },
-    ];
-    console.log(loadedBooks);
-    return loadedBooks;
-
+export function loadUsersFromLocalStorage(): User[] {
+    const storedUserd = localStorage.getItem("users");
+    
+    return storedUserd ? JSON.parse(storedUserd) : [];
 }
+
+// function saveUserBooksToLocalStorage() {
+//     localStorage.setItem('userBooks', JSON.stringify(userBooks));
+// }
+
+// function loadUserBooksFromLocalStorage(): Book[] {
+//     const storedUserBooks = localStorage.getItem('userBooks');
+//     const loadedBooks = storedUserBooks ? JSON.parse(storedUserBooks) : [
+//         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Acting and Reflecting", author: "Wilfried Sieg", category: "Philosophy", status: "Taken" },
+//         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Marriage Ultimatum", author: "Lindsay Armstrong", category: "Romance", status: "Taken" },
+//         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "The Time Machine", author: "Lindsay Armstrong", category: "Fiction", status: "Taken" },
+//         { id: crypto.randomUUID().replace("-", "").slice(-8), title: "Fear No Evil", author: "Anatoly Shcharansky", category: "Biography", status: "Taken" },
+//     ];
+
+//     return loadedBooks;
+// }
 
 export function orderBook(book: Book) {
     if (books.some((b) => b.id === book.id)) {
@@ -77,20 +112,31 @@ export function notifySubscribers() {
     subscribers.forEach((callback) => callback());
 }
 
-export function getUserBook() {
-    return userBooks;
+export function addBookToUser(username: string, book: Book) {
+    const user = users.find((u => u.username === username)); 
+
+    if (user) {
+        user.borrowedBooks.push(book);
+        saveUsersToLocalStorage();
+        notifySubscribers();
+    }
+
+    // userBooks.push(book);
+    // saveUserBooksToLocalStorage();
+    // notifySubscribers();
 }
 
-export function addBookToUser(book: Book) {
-    userBooks.push(book);
-    saveUserBooksToLocalStorage();
-    notifySubscribers();
-}
+export function removeBookFromUser(username: string, bookId: string) {
+    const user = users.find((u => u.username === username)); 
 
-export function removeBookFromUser(bookId: string) {
-    userBooks = userBooks.filter((book) => book.id !== bookId);
-    saveUserBooksToLocalStorage();
-    notifySubscribers();
+    if (user) {
+        user.borrowedBooks = user.borrowedBooks.filter((book) => book.id !== bookId); 
+        saveUsersToLocalStorage();
+        notifySubscribers();
+    }
+    // userBooks = userBooks.filter((book) => book.id !== bookId);
+    // saveUserBooksToLocalStorage();
+    // notifySubscribers();
 }
 
 export function updateBookStatus(bookId: string, status: "Free" | "Taken" | "Lost") {
@@ -102,3 +148,21 @@ export function updateBookStatus(bookId: string, status: "Free" | "Taken" | "Los
         notifySubscribers();
     }
 }
+
+
+export function getBorrowedBooks(username: string) {
+    const user = users.find((u) => u.username === username);
+
+    return user ? user.borrowedBooks: [];
+}
+
+// export function getUserBook() {
+//     return userBooks;
+// }
+
+
+
+
+
+
+

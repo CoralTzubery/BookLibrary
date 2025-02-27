@@ -1,4 +1,4 @@
-import { getBooks, getUserBook } from "./model.js";
+import { getBooks, getBorrowedBooks } from "./model.js";
 import { borrowBook, returnBook } from "./controller.js";
 export function renderBooks(books) {
     const bookList = document.querySelector(".recently-added");
@@ -52,7 +52,10 @@ export function renderBooks(books) {
                     if (bookId) {
                         borrowBook(bookId);
                         renderBooks(getBooks());
-                        renderMyBooks(getUserBook());
+                        const username = localStorage.getItem("currentUser");
+                        if (username) {
+                            renderMyBooks(username);
+                        }
                     }
                 }
                 else if (target.classList.contains('return-button')) {
@@ -60,15 +63,19 @@ export function renderBooks(books) {
                     if (bookId) {
                         returnBook(bookId);
                         renderBooks(getBooks());
-                        renderMyBooks(getUserBook());
+                        const username = localStorage.getItem("currentUser");
+                        if (username) {
+                            renderMyBooks(username);
+                        }
                     }
                 }
             });
         }
     });
 }
-export function renderMyBooks(books) {
+export function renderMyBooks(username) {
     const bookTable = document.querySelector(".my-books");
+    const borrowedBooks = getBorrowedBooks(username);
     if (bookTable) {
         bookTable.innerHTML = `
             <thead>
@@ -80,15 +87,13 @@ export function renderMyBooks(books) {
                 </tr>
             </thead>
             <tbody>
-                ${books.map((book) => `
+                ${borrowedBooks.map((book) => `
                     <tr>
                         <td>${book.title}</td>
                         <td>${book.author}</td>
                         <td>${book.category}</td>
                         <td>
-                            ${book.status !== "Lost" ?
-            `<button class="return-button" data-book-id="${book.id}">Return</button>` :
-            ""}
+                            ${book.status !== "Lost" ? `<button class="return-button" data-book-id="${book.id}">Return</button>` : ""}
                         </td>
                     </tr>
                 `).join("")}
@@ -98,9 +103,10 @@ export function renderMyBooks(books) {
             const target = event.target;
             if (target.classList.contains('return-button')) {
                 const bookId = target.dataset.bookId;
-                if (bookId) {
+                const username = localStorage.getItem("currentUser");
+                if (bookId && username) {
                     returnBook(bookId);
-                    renderMyBooks(getUserBook());
+                    renderMyBooks(username);
                     renderBooks(getBooks());
                 }
             }

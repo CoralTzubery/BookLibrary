@@ -1,4 +1,4 @@
-import { Book, orderBook, reportLostBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser, getUserBook } from "./model.js";
+import { Book, orderBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser, getBorrowedBooks, createUser, authenticateUser } from "./model.js";
 import { renderBooks } from "./view.js";
 
 onBooksUpdate(() => renderBooks(getBooks()));
@@ -37,17 +37,19 @@ export function setupOrderForm() {
 
 export function populateBooksDropdown() {
     const bookDropdown = document.querySelector("#bookDropdown") as HTMLSelectElement;
-    const userBooks = getUserBook();
+    const username = localStorage.getItem("currentUser");
 
-    if (bookDropdown) {
-        bookDropdown.innerHTML = userBooks.map(book => `<option value="${book.id}">${book.title}</option>`).join('');
+    if (bookDropdown && username) {
+        const borrowedBooks = getBorrowedBooks(username);
+        bookDropdown.innerHTML = borrowedBooks.map(book => `<option value="${book.id}">${book.title}</option>`).join('');
     }
 }
 
 export function setupReportForm() {
     const form = document.querySelector("#report-form") as HTMLFormElement;
+    const username = localStorage.getItem("currentUser");
 
-    if (form) {
+    if (form && username) {
         form.addEventListener("submit", (event) => {
             event.preventDefault();
 
@@ -55,7 +57,7 @@ export function setupReportForm() {
             const bookId = bookDropdown.value;
 
             updateBookStatus(bookId, "Lost");
-            removeBookFromUser(bookId);
+            removeBookFromUser(username, bookId);
 
             alert("Book reported as lost!");
         });
@@ -64,21 +66,76 @@ export function setupReportForm() {
 
 export function borrowBook(bookId: string) {
     const book = getBooks().find((b) => b.id === bookId);
+    const username = localStorage.getItem("currentUser");
 
-    if (book) {
+    if (book && username) {
         updateBookStatus(bookId, "Taken");
-        addBookToUser(book);
+        addBookToUser(username, book);
     }
 }
 
 export function returnBook(bookId: string) {
-    updateBookStatus(bookId, "Free");
-    removeBookFromUser(bookId);
+    const username = localStorage.getItem("currentUser");
+
+    if(username) {
+        updateBookStatus(bookId, "Free");
+        removeBookFromUser(username, bookId);
+    }
 }
+
+export function setupLoginForm() {
+    const form = document.querySelector("#login-form") as HTMLFormElement;
+
+    if (form) {
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const username = (document.querySelector("#username") as HTMLInputElement).value;
+            const password = (document.querySelector("#password") as HTMLInputElement).value;
+
+            try {
+                authenticateUser(username, password);
+                alert("Login successfuly!");
+                localStorage.setItem("currentUser", username);
+                window.location.href = "index.html";
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+    }
+}
+
+export function setupSignupForm() {
+    const form = document.querySelector("#signup-form") as HTMLFormElement;
+
+    if (form) {
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const username = (document.querySelector("#username") as HTMLInputElement).value;
+            const password = (document.querySelector("#password") as HTMLInputElement).value;
+
+            try {
+                createUser({
+                    username,
+                    password, 
+                    borrowedBooks: []
+                });
+                alert("Signup successfuly!");
+                window.location.href="login.html";
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+    }
+}
+
 
 export function init() {
     setupOrderForm();
     setupReportForm();
     populateBooksDropdown();
     renderBooks(getBooks());
+    setupLoginForm();
+    setupSignupForm();
 }

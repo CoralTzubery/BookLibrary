@@ -1,4 +1,4 @@
-import { orderBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser, getUserBook } from "./model.js";
+import { orderBook, getBooks, onBooksUpdate, updateBookStatus, addBookToUser, removeBookFromUser, getBorrowedBooks, createUser, authenticateUser } from "./model.js";
 import { renderBooks } from "./view.js";
 onBooksUpdate(() => renderBooks(getBooks()));
 export function setupOrderForm() {
@@ -28,38 +28,87 @@ export function setupOrderForm() {
 }
 export function populateBooksDropdown() {
     const bookDropdown = document.querySelector("#bookDropdown");
-    const userBooks = getUserBook();
-    if (bookDropdown) {
-        bookDropdown.innerHTML = userBooks.map(book => `<option value="${book.id}">${book.title}</option>`).join('');
+    const username = localStorage.getItem("currentUser");
+    if (bookDropdown && username) {
+        const borrowedBooks = getBorrowedBooks(username);
+        bookDropdown.innerHTML = borrowedBooks.map(book => `<option value="${book.id}">${book.title}</option>`).join('');
     }
 }
 export function setupReportForm() {
     const form = document.querySelector("#report-form");
-    if (form) {
+    const username = localStorage.getItem("currentUser");
+    if (form && username) {
         form.addEventListener("submit", (event) => {
             event.preventDefault();
             const bookDropdown = document.querySelector("#bookDropdown");
             const bookId = bookDropdown.value;
             updateBookStatus(bookId, "Lost");
-            removeBookFromUser(bookId);
+            removeBookFromUser(username, bookId);
             alert("Book reported as lost!");
         });
     }
 }
 export function borrowBook(bookId) {
     const book = getBooks().find((b) => b.id === bookId);
-    if (book) {
+    const username = localStorage.getItem("currentUser");
+    if (book && username) {
         updateBookStatus(bookId, "Taken");
-        addBookToUser(book);
+        addBookToUser(username, book);
     }
 }
 export function returnBook(bookId) {
-    updateBookStatus(bookId, "Free");
-    removeBookFromUser(bookId);
+    const username = localStorage.getItem("currentUser");
+    if (username) {
+        updateBookStatus(bookId, "Free");
+        removeBookFromUser(username, bookId);
+    }
+}
+export function setupLoginForm() {
+    const form = document.querySelector("#login-form");
+    if (form) {
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const username = document.querySelector("#username").value;
+            const password = document.querySelector("#password").value;
+            try {
+                authenticateUser(username, password);
+                alert("Login successfuly!");
+                localStorage.setItem("currentUser", username);
+                window.location.href = "index.html";
+            }
+            catch (error) {
+                alert(error.message);
+            }
+        });
+    }
+}
+export function setupSignupForm() {
+    const form = document.querySelector("#signup-form");
+    if (form) {
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const username = document.querySelector("#username").value;
+            const password = document.querySelector("#password").value;
+            try {
+                createUser({
+                    username,
+                    password,
+                    borrowedBooks: []
+                });
+                alert("Signup successfuly!");
+                window.location.href = "login.html";
+            }
+            catch (error) {
+                alert(error.message);
+            }
+        });
+    }
 }
 export function init() {
     setupOrderForm();
     setupReportForm();
     populateBooksDropdown();
     renderBooks(getBooks());
+    setupLoginForm();
+    setupSignupForm();
 }

@@ -55,11 +55,14 @@
 
     <script type="module">
         import { init } from "./dist/controller.js";
-        import { getUserBook } from "./dist/model.js";
         import { renderMyBooks } from "./dist/view.js";
          
         init();
-        renderMyBooks(getUserBook());
+        const username = localStorage.getItem("currentUser");
+
+        if(username) {
+            renderMyBooks(username);
+        }
     </script>
 </body>
 </html>
